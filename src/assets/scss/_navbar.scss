@@ -1,0 +1,83 @@
+.navbar {
+    margin: 0;
+    min-height: $navbar-size;
+    background-color: white;
+    border-bottom: 2px solid #F3F3F3;
+    width: 100%;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    -moz-box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1); 
+    .container {
+        display: flex;
+        flex-wrap: nowrap;
+        min-height: $navbar-size;
+        .navbar-start {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .navbar-brand {
+                margin-right: 10px; /* change this */
+                font-family: Roboto, Arial, Helvetica, sans-serif;
+            }
+            .navbar-search {
+                position: relative;
+                .fa-search {
+                    position: absolute;
+                    top: 7px;
+                    left: 9px;
+                    font-size: 20px;
+                }
+                input {
+                    border-radius: 10px;
+                    outline: 0;
+                    box-shadow: 0;
+                    padding: 10px 25px;
+                    background: white;
+                    border: solid 1px #e6e6e6;
+                    border-bottom-width: 3px;
+                    border-radius: 5px;
+                    line-height: 10px;
+                    transition: all .8s ease;
+                    text-indent: 15px;
+                    width: 250px;
+                    &:focus {
+                        width: 400px;
+                        transition: all .8s ease;
+                    }
+                }
+            }
+        }
+        .navbar-end {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            .navbar-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                padding: 10px;
+                cursor: pointer;
+                font-weight: 500;
+                font-size: 1.4rem;
+                font-family: Roboto, Geneva, Tahoma, sans-serif;
+                border-bottom: 1px solid transparent;
+                height: 100%;
+                margin: 0 10px;
+                font-size: 1rem;
+                &:hover {
+                    color: $navbar_primary;
+                    border-color: $navbar_primary;
+                }
+                &.active-item {
+                    border-color: $navbar_secondary;
+                    border-width: 2px;
+                    color: $navbar_primary;
+                }
+            }
+        }
+    }
+}
