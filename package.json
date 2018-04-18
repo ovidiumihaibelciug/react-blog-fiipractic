@@ -20,7 +20,10 @@
   },
   "devDependencies": {
     "font-awesome": "^4.7.0",
+    "history": "^4.7.2",
     "material-ui": "^0.20.0",
-    "node-sass-chokidar": "^1.2.2"
+    "node-sass-chokidar": "^1.2.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   }
 }
