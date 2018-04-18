@@ -24,8 +24,18 @@ $fa-font-path: "~font-awesome/fonts";
 
 @import '_navbar';
 
+
+@import '_login';
+
 body {
     background: whitesmoke;
+    height: 100vh;
+    width: 100vw;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import Navbar from "../components/Navbar";
+import LoginContainer from "../containers/LoginContainer";
 
 export default class Login extends Component {
   render() {
     return (
-      <div>
-        <Navbar />
-      </div>
+      <section className="login-section">
+        <LoginContainer />
+      </section>
     );
   }
 }
