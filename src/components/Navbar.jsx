@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { NavLink } from "react-router-dom";
 
 export default class Navbar extends Component {
@@ -11,12 +12,12 @@ export default class Navbar extends Component {
             <div className="navbar-start">
               <div className="navbar-brand">Brand</div>
               <div className="navbar-search">
-                <span className="fa fa-search" />
-                <input type="text" placeholder="Search books..." />
+                <i className="fa fa-search"></i>
+                <input type="text" placeholder="Search..." />
               </div>
             </div>
             <div className="navbar-end">
-              <NavLink
+              {/* <NavLink
                 to="/"
                 exact
                 className="navbar-item"
@@ -31,7 +32,7 @@ export default class Navbar extends Component {
                 activeClassName="active-item"
               >
                 Register
-              </NavLink>
+              </NavLink> */}
               <div className="navbar-item navbar-dropdown">
                 <span>Hello, Ovidiu</span>
                 {/* <a href="" class="">My Books</a> */}

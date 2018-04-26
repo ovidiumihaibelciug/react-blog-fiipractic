@@ -9,6 +9,10 @@
 @import '../../../node_modules/font-awesome/scss/_variables.scss';
 $fa-font-path: "~font-awesome/fonts";
 @import "../../../node_modules/font-awesome/scss/font-awesome";
+
+.fa{
+  font-family: FontAwesome !important;
+}
 /* Vars */
 @import '_vars';
 

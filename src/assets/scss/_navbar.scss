@@ -23,21 +23,28 @@
             }
             .navbar-search {
                 position: relative;
+                height: 100%;
+                border-radius: 0;
                 .fa-search {
                     position: absolute;
-                    top: 7px;
-                    left: 9px;
+                    top: 22px;
+                    left: 29px; // + margin
                     font-size: 20px;
                 }
                 input {
-                    border-radius: 10px;
+                    border-radius: 0px;
+                    height: 100%;
                     outline: 0;
                     box-shadow: 0;
                     padding: 10px 25px;
                     background: white;
-                    border: solid 1px #e6e6e6;
-                    border-bottom-width: 3px;
-                    border-radius: 5px;
+                    margin-left: 20px;
+                    border-left: 1px solid #e6e6e6;
+                    border-right: 1px solid #e6e6e6;               
+                    border-top: none;
+                    border-bottom: none;
+                    // border: solid 1px #e6e6e6;
+                    // border-bottom-width: 3px;
                     line-height: 10px;
                     transition: all .8s ease;
                     text-indent: 15px;
