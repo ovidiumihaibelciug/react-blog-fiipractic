@@ -18,7 +18,7 @@
     .post-title {
         span {
             &:first-child {
-                color: $secondary !important;
+                color: $secondary !important;   
             }
             &:nth-child(2) {
                 font-size: 1rem !important;
@@ -27,5 +27,28 @@
     }
     .btn-blog-primary {
         color: $primary !important; 
+    }
+}
+
+.post-links {
+    text-align: center;
+    margin-top: -$home-margin*1.5;
+    z-index: 100;
+    margin: 50px;
+    a {
+        padding: 10px 12px;
+        margin: 0 5px;
+        border-radius: 2px;
+        background: white;
+        border: 2px solid $box-border-color;
+        font-weight: 600;
+        color: $secondary-text;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba($color: $secondary-text, $alpha: .1)
+        }
+        &.page-active {
+            color: $navbar_primary;
+        }
     }
 }

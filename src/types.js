@@ -14,3 +14,18 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export const GET_POSTS_PAGINATE = gql`
+  query($filters: JSON, $options: JSON) {
+    posts(filters: $filters, options: $options) {
+      _id
+      title
+      description
+      user {
+        _id
+        firstname
+        lastname
+      }
+    }
+  }
+`;
