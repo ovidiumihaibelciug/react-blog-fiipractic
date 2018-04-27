@@ -133,7 +133,14 @@
     }
 }
 
-.comment-box {
+.comment-box, .add-comment-section {
     margin: 2% 5%;
+}
 
+.add-comment-section {
+    padding: 15px;
+    .title {
+        font-size: 1.5rem;
+        color: rgba(0, 0, 0, .7);
+    }
 }

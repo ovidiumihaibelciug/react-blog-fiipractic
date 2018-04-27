@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 
 import Post from "../components/Post/Post";
 import Comment from "../components/Post/Comment";
+import AddComment from "../containers/AddComment";
 
 class PostContainer extends Component {
   componentWillMount() {
@@ -32,6 +33,7 @@ class PostContainer extends Component {
                     <i className="fa fa-comment" />
                   </div>
                 </div>
+                <AddComment />
                 {post.comments.map(comment => <Comment comment={comment} />)}
               </div>
               <div className="right-side">
