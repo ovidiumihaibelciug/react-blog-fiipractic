@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import HomeContainer from "../containers/HomeContainer";
+import PostContainer from "../containers/PostContainer";
 import Navbar from "../components/Navbar";
 
 export default class Login extends Component {
@@ -8,7 +8,7 @@ export default class Login extends Component {
     return (
       <section className="home-section">
         <Navbar />
-        <HomeContainer />
+        <PostContainer />
       </section>
     );
   }

@@ -6,6 +6,15 @@ import RaisedButton from "material-ui/RaisedButton";
 import { withApollo } from "react-apollo";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post/Post";
+import Chip from "material-ui/Chip";
+import Avatar from "material-ui/Avatar";
+
+const styles = {
+  chip: {
+    margin: 5
+  },
+  bcolor: "#7957D5"
+};
 
 class HomeContainer extends Component {
   componentWillMount() {
@@ -14,7 +23,8 @@ class HomeContainer extends Component {
       ? this.props.match.params.page
       : 1;
     this.props.rootStore.postStore.getPostsPaginate(page * 10);
-    console.log(page);
+    this.props.rootStore.postStore.getAllTags();
+    this.props.rootStore.postStore.getAllCategories();
   }
 
   render() {
@@ -26,7 +36,6 @@ class HomeContainer extends Component {
     const path = "/home/";
 
     let output = [];
-    output = [];
 
     if (page === 1) {
       output = [
@@ -57,7 +66,6 @@ class HomeContainer extends Component {
 
     return (
       <div className="home-box">
-        <Navbar />
         <div className="container">
           <div className="flex-row">
             <div className="left-side">
@@ -66,7 +74,54 @@ class HomeContainer extends Component {
               })}
               <div className="post-links">{output}</div>
             </div>
-            <div className="right-side" />
+            <div className="right-side">
+              <div className="box tags-box">
+                <div className="title">Tags</div>
+                <div className="tags">
+                  {postStore.tags.map(tag => (
+                    <a href={/tag/ + tag._id} className="tag">
+                      <Chip
+                        backgroundColor={styles.bcolor}
+                        style={styles.chip}
+                        labelColor="#fff"
+                      >
+                        <Avatar
+                          size={32}
+                          color="#fff"
+                          backgroundColor="#8c67ef"
+                        >
+                          {tag.name.substr(0, 2).toUpperCase()}
+                        </Avatar>
+                        {tag.name}
+                      </Chip>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="box categories-box">
+                <div className="title">Categories</div>
+                <div className="categories">
+                  {postStore.categories.map(category => (
+                    <a href={/category/ + category._id} className="category">
+                      <Chip
+                        backgroundColor="#8c67ef"
+                        style={styles.chip}
+                        labelColor="#fff"
+                      >
+                        <Avatar
+                          size={32}
+                          color="#fff"
+                          backgroundColor={styles.bcolor}
+                        >
+                          {category.name.substr(0, 2).toUpperCase()}
+                        </Avatar>
+                        {category.name}
+                      </Chip>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

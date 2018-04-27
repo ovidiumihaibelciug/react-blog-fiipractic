@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { NavLink } from "react-router-dom";
 
 export default class Navbar extends Component {
@@ -12,7 +11,7 @@ export default class Navbar extends Component {
             <div className="navbar-start">
               <div className="navbar-brand">Brand</div>
               <div className="navbar-search">
-                <i className="fa fa-search"></i>
+                <i className="fa fa-search" />
                 <input type="text" placeholder="Search..." />
               </div>
             </div>

@@ -52,3 +52,29 @@
         }
     }
 }
+
+.tags-box, .categories-box {
+    margin-top: $home-margin;
+    .title {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid whitesmoke;
+        font-size: 1.2rem;
+        color: $secondary-text;
+    }
+}
+
+.tag, .category {
+    &:hover {
+        div {
+            background-color: $primary !important; 
+        }
+    }
+}
+
+.post-category {
+    padding: 10px 0;
+}

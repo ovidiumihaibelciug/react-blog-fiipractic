@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
-} from "material-ui/Card";
+import { Card, CardActions, CardTitle, CardText } from "material-ui/Card";
+import Chip from "material-ui/Chip";
 import FlatButton from "material-ui/FlatButton";
+
+const styles = {
+  chip: {
+    marginTop: -10,
+    marginBottom: 10,
+    marginRight: 4
+  },
+  bcolor: "#7957D5"
+};
 
 class Post extends Component {
   render() {
@@ -24,9 +27,33 @@ class Post extends Component {
               </a>
             }
           />
-          <CardText>{post.description}</CardText>
+          <CardText>
+            <div>
+              {post.tags.map(tag => {
+                return (
+                  <Chip
+                    backgroundColor={styles.bcolor}
+                    style={styles.chip}
+                    labelColor="#fff"
+                  >
+                    {tag.name}
+                  </Chip>
+                );
+              })}
+            </div>
+            <div className="post-category">
+              <Chip
+                backgroundColor="#8c67ef"
+                style={styles.chip}
+                labelColor="#fff"
+              >
+                {post.category.name}
+              </Chip>
+            </div>
+            {post.description}
+          </CardText>
           <CardActions>
-            <a href="">
+            <a href={"/post/" + post._id}>
               <FlatButton
                 className="btn-blog-primary"
                 label={<i className="fa fa-2x fa-eye" />}
@@ -42,6 +69,7 @@ class Post extends Component {
                 primary={true}
               />
             </a>
+            <div className="pull-right">{post.createdAt}</div>
           </CardActions>
         </Card>
       </div>

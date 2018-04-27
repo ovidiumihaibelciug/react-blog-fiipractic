@@ -1,5 +1,10 @@
 import { observable, action, computed, decorate } from "mobx";
-import { GET_POSTS, GET_POSTS_PAGINATE } from "../types";
+import {
+  GET_POSTS,
+  GET_POSTS_PAGINATE,
+  GET_ALL_TAGS,
+  GET_ALL_CATEGORIES
+} from "../types";
 import ApolloClient from "apollo-boost";
 import { client } from "../apollo";
 import { filter } from "async";
@@ -8,6 +13,8 @@ class PostStore {
   loading = true;
   text = "Lorem ipsum dolor situm";
   posts = [];
+  tags = [];
+  categories = [];
 
   handleLoading() {
     this.loading = !this.loading;
@@ -18,7 +25,6 @@ class PostStore {
     const { data } = await client.query({
       query: GET_POSTS
     });
-    console.log(data);
     this.posts = data.posts;
     this.loading = false;
   }
@@ -30,10 +36,25 @@ class PostStore {
         options: { skip: skip, limit: limit, sort: { createdAt: -1 } }
       }
     });
-    console.log(data);
     let newPosts = data.posts;
     this.posts = newPosts;
     this.loading = false;
+  }
+
+  async getAllTags() {
+    const { data } = await client.query({
+      query: GET_ALL_TAGS
+    });
+
+    this.tags = data.tags;
+  }
+
+  async getAllCategories() {
+    const { data } = await client.query({
+      query: GET_ALL_CATEGORIES
+    });
+
+    this.categories = data.postCategories;
   }
 }
 
@@ -41,9 +62,13 @@ decorate(PostStore, {
   loading: observable,
   text: observable,
   posts: observable,
+  tags: observable,
+  categories: observable,
   handleLoading: action,
   getPosts: action,
-  getPostsPaginate: action
+  getPostsPaginate: action,
+  getAllTags: action,
+  getAllCategories: action
 });
 
 export default PostStore;

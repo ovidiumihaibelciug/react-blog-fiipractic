@@ -21,11 +21,38 @@ export const GET_POSTS_PAGINATE = gql`
       _id
       title
       description
+      createdAt
       user {
         _id
         firstname
         lastname
       }
+      category {
+        _id
+        name
+      }
+      tags {
+        _id
+        name
+      }
+    }
+  }
+`;
+
+export const GET_ALL_TAGS = gql`
+  query($filters: JSON, $options: JSON) {
+    tags(filters: $filters, options: $options) {
+      _id
+      name
+    }
+  }
+`;
+
+export const GET_ALL_CATEGORIES = gql`
+  query($filters: JSON, $options: JSON) {
+    postCategories(filters: $filters, options: $options) {
+      _id
+      name
     }
   }
 `;
