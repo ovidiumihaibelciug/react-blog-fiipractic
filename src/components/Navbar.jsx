@@ -33,6 +33,9 @@ export default class Navbar extends Component {
               >
                 Register
               </NavLink> */}
+              <NavLink to="/home" className="navbar-item navbar-dropdown">
+                Home
+              </NavLink>
               <div className="navbar-item navbar-dropdown">
                 <span>Hello, Ovidiu</span>
                 {/* <a href="" class="">My Books</a> */}
