@@ -1,10 +1,15 @@
 /* colors */
 $background-color: #F2F5F7;
 $navbar_primary: #8c67ef; /* hover */
+$primary: #8c67ef;
+$secondary: #7957D5;
 $navbar_secondary: findColorInvert($navbar_primary); /* active */
 $text-blue: #3b4d5e;
 $box-border-color: #ECEFF1;
 $secondary-text: #6a737c;
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
 
 /* spacing */
 $home-margin: 50px;

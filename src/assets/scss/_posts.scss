@@ -1,0 +1,31 @@
+
+.home-box {
+    .flex-row {
+        display: flex;
+        justify-content: center;
+        .left-side {
+            flex: 3;
+        }
+        .right-side {
+            flex: 1;
+        }
+    }
+
+}
+
+.post-box {
+    margin: 5%;
+    .post-title {
+        span {
+            &:first-child {
+                color: $secondary !important;
+            }
+            &:nth-child(2) {
+                font-size: 1rem !important;
+            }
+        }
+    }
+    .btn-blog-primary {
+        color: $primary !important; 
+    }
+}

@@ -28,13 +28,18 @@ $fa-font-path: "~font-awesome/fonts";
 
 @import '_navbar';
 
-
+/*
+ ***   PAGES   ***
+*/
 @import '_login';
+@import '_posts.scss';
+
 
 body {
     background: whitesmoke;
     height: 100vh;
     width: 100vw;
+    overflow-x: hidden;
 }
 
 #root {
