@@ -37,7 +37,11 @@ export default class Navbar extends Component {
               </NavLink>
               <div className="navbar-item navbar-dropdown">
                 <span>Hello, Ovidiu</span>
-                {/* <a href="" class="">My Books</a> */}
+                <div className="dropdown-content">
+                  <NavLink to={"/profile"} exact className="dropdown-link">
+                    <i className="fa fa-user" /> &nbsp; My Profile
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>

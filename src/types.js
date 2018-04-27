@@ -92,3 +92,42 @@ export const GET_POST_BY_ID = gql`
     }
   }
 `;
+
+export const GET_GROUPS = {};
+
+export const GET_USER_BY_ID = gql`
+  query($filters: JSON, $options: JSON) {
+    users(filters: $filters, options: $options) {
+      _id
+      username
+      firstname
+      lastname
+      email
+      createdAt
+      posts {
+        _id
+        title
+        description
+        createdAt
+        user {
+          _id
+          firstname
+          lastname
+          email
+        }
+        tags {
+          _id
+          name
+        }
+        category {
+          _id
+          name
+        }
+      }
+      groups {
+        _id
+        name
+      }
+    }
+  }
+`;

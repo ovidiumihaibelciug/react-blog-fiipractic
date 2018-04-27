@@ -22,7 +22,7 @@ class Post extends Component {
             className="post-title"
             title={<a>{post.title}</a>}
             subtitle={
-              <a href="/">
+              <a href={/profile/ + post.user._id}>
                 {"Posted by " + post.user.lastname + " " + post.user.firstname}
               </a>
             }

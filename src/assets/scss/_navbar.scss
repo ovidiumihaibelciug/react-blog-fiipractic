@@ -88,3 +88,44 @@
         }
     }
 }
+
+.navbar-dropdown {
+    font-size: 16px;    
+    // padding: 14px 16px;
+    margin: 0;
+    position: relative;
+    display: block;
+    .dropdown-content {
+        position: absolute;
+        top: -3px;
+        display: none;
+        background-color: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        margin-top: $navbar-size;
+        a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+    }
+    &:hover {
+        .dropdown-content {
+            display: block;
+        }
+    }
+    .dropdown-content {
+        a:hover {
+            background: whitesmoke;
+        }
+    }
+}
+
+.dropdown-link {
+    white-space: nowrap;
+}
+
