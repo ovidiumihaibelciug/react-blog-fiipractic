@@ -43,6 +43,32 @@ class PostStore {
     this.loading = false;
   }
 
+  async getPostsByCategoryPaginate(skip, category, limit = 5) {
+    const { data } = await client.query({
+      query: GET_POSTS_PAGINATE,
+      variables: {
+        options: { skip: skip, limit: limit, sort: { createdAt: -1 } },
+        filters: { categoryId: category }
+      }
+    });
+    let newPosts = data.posts;
+    this.posts = newPosts;
+    this.loading = false;
+  }
+
+  async getPostsByTagPaginate(skip, tag, limit = 5) {
+    const { data } = await client.query({
+      query: GET_POSTS_PAGINATE,
+      variables: {
+        options: { skip: skip, limit: limit, sort: { createdAt: -1 } },
+        filters: { tagIds: tag }
+      }
+    });
+    let newPosts = data.posts;
+    this.posts = newPosts;
+    this.loading = false;
+  }
+
   async getPostById(id) {
     const { data } = await client.query({
       query: GET_POST_BY_ID,
@@ -85,7 +111,9 @@ decorate(PostStore, {
   getPostsPaginate: action,
   getPostById: action,
   getAllTags: action,
-  getAllCategories: action
+  getAllCategories: action,
+  getPostsByCategoryPaginate: action,
+  getPostsByTagPaginate: action
 });
 
 export default PostStore;

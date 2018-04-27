@@ -37,5 +37,21 @@ export const routes = [
   {
     path: "/profile/:id",
     component: Profile
+  },
+  {
+    path: "/category/:category",
+    component: Home
+  },
+  {
+    path: "/category/:category/:page",
+    component: Home
+  },
+  {
+    path: "/tag/:tag",
+    component: Home
+  },
+  {
+    path: "/tag/:tag/:page",
+    component: Home
   }
 ];

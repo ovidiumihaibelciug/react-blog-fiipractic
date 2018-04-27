@@ -64,6 +64,8 @@ export const GET_POST_BY_ID = gql`
       title
       description
       createdAt
+      categoryId
+      tagIds
       comments {
         _id
         text

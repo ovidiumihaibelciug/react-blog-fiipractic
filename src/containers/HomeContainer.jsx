@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import Post from "../components/Post/Post";
 import Chip from "material-ui/Chip";
 import Avatar from "material-ui/Avatar";
+import SecondNavbar from "../components/SecondNavbar";
 
 const styles = {
   chip: {
@@ -22,18 +23,40 @@ class HomeContainer extends Component {
     const page = this.props.match.params.page
       ? this.props.match.params.page
       : 1;
-    this.props.rootStore.postStore.getPostsPaginate(page * 10);
+    const category = this.props.match.params.category
+      ? this.props.match.params.category
+      : 0;
+    const tag = this.props.match.params.tag ? this.props.match.params.tag : 0;
+    if (!category && !tag) {
+      this.props.rootStore.postStore.getPostsPaginate(page * 10);
+    } else if (category) {
+      this.props.rootStore.postStore.getPostsByCategoryPaginate(
+        page * 10,
+        category
+      );
+    } else if (tag) {
+      this.props.rootStore.postStore.getPostsByTagPaginate(page * 10, tag);
+    }
     this.props.rootStore.postStore.getAllTags();
     this.props.rootStore.postStore.getAllCategories();
   }
 
   render() {
     // let userStore = this.props.rootStore.userStore;
+    console.log(this.props.match);
     let postStore = this.props.rootStore.postStore;
+    const categories = this.props.rootStore.postStore.categories;
     const page = this.props.match.params.page
       ? parseInt(this.props.match.params.page)
       : 1;
-    const path = "/home/";
+    let path;
+    if (!this.props.match.params.category && !this.props.match.params.tag) {
+      path = "/home/";
+    } else if (this.props.match.params.category) {
+      path = "/category/" + this.props.match.params.category + "/";
+    } else {
+      path = "/tag/" + this.props.match.params.tag + "/";
+    }
 
     let output = [];
 
@@ -69,6 +92,7 @@ class HomeContainer extends Component {
         <div className="container">
           <div className="flex-row">
             <div className="left-side">
+              <SecondNavbar categories={categories} title={"All categories"} />
               {postStore.posts.map(post => {
                 return <Post post={post} />;
               })}

@@ -129,3 +129,64 @@
     white-space: nowrap;
 }
 
+
+.secondary-nav {
+    margin-top: $home-margin * 2;
+    margin-left: 5%;
+    margin-right: 5%;
+    // border-bottom: 1px solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #E6EAED;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .secondary-nav-start {
+        font-size: 1.3rem;
+        color:  #3b4d5e;
+        padding-bottom: 10px;
+    }
+    .secondary-nav-end {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .navbar-item {
+            // flex: 1;
+            padding: 15px;
+            margin: 0 10px 0 10px;
+            text-decoration: none;
+            color: #969CA2;
+            font-size: 1rem;
+            font-weight: 500 !important;
+            height: 100%;
+            border: 1px solid transparent;
+            word-wrap: none !important;
+            &:hover, &:hover &:not(.active-secnav) {
+                color: $navbar_primary;
+                // border-bottom: 1px solid;
+                border-bottom-style: solid;
+                border-bottom-color: $navbar_secondary;
+            }
+            &:active, &.active-secnav {
+                color: $navbar_primary;
+                position: relative;
+                border: none;
+                &:before {
+                    content : "";
+                    position: absolute;
+                    left    : 25%;
+                    bottom  : -1px;
+                    height  : 1px;
+                    width   : 50%;  /* or 100px */
+                    -webkit-box-shadow: 0px -4px 31px 0px $navbar_primary;
+                    -moz-box-shadow: 0px -4px 31px 0px $navbar_primary;
+                    box-shadow: 0px -4px 31px 0px $navbar_primary;
+                    border-bottom-width: 3px;
+                    border-bottom-style: solid;
+                    border-bottom-color: $navbar_primary !important;
+                    // border-bottom:1px solid magenta;
+                  }
+            }
+        }
+    }
+}
