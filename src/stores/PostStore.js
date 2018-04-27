@@ -3,7 +3,8 @@ import {
   GET_POSTS,
   GET_POSTS_PAGINATE,
   GET_ALL_TAGS,
-  GET_ALL_CATEGORIES
+  GET_ALL_CATEGORIES,
+  GET_POST_BY_ID
 } from "../types";
 import ApolloClient from "apollo-boost";
 import { client } from "../apollo";
@@ -13,6 +14,7 @@ class PostStore {
   loading = true;
   text = "Lorem ipsum dolor situm";
   posts = [];
+  post = "";
   tags = [];
   categories = [];
 
@@ -41,6 +43,19 @@ class PostStore {
     this.loading = false;
   }
 
+  async getPostById(id) {
+    const { data } = await client.query({
+      query: GET_POST_BY_ID,
+      variables: {
+        filters: {
+          _id: id
+        }
+      }
+    });
+    console.log(data.posts[0]);
+    this.post = data.posts[0];
+  }
+
   async getAllTags() {
     const { data } = await client.query({
       query: GET_ALL_TAGS
@@ -62,11 +77,13 @@ decorate(PostStore, {
   loading: observable,
   text: observable,
   posts: observable,
+  post: observable,
   tags: observable,
   categories: observable,
   handleLoading: action,
   getPosts: action,
   getPostsPaginate: action,
+  getPostById: action,
   getAllTags: action,
   getAllCategories: action
 });

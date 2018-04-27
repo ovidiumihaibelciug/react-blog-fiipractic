@@ -56,3 +56,39 @@ export const GET_ALL_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_POST_BY_ID = gql`
+  query($filters: JSON, $options: JSON) {
+    posts(filters: $filters, options: $options) {
+      _id
+      title
+      description
+      createdAt
+      comments {
+        _id
+        text
+        createdAt
+        user {
+          _id
+          firstname
+          lastname
+          email
+        }
+      }
+      user {
+        _id
+        firstname
+        lastname
+        email
+      }
+      tags {
+        _id
+        name
+      }
+      category {
+        _id
+        name
+      }
+    }
+  }
+`;

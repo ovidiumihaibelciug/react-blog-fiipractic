@@ -10,7 +10,19 @@
             flex: 1;
         }
     }
+}
 
+.post-box {
+    .flex-row {
+        display: flex;
+        justify-content: center;
+        .left-side {
+            flex: 4;
+        }
+        .right-side {
+            flex: 2;
+        }
+    }
 }
 
 .post-box {
@@ -77,4 +89,51 @@
 
 .post-category {
     padding: 10px 0;
+}
+
+.card-action {
+    clear: both !important;
+    padding: 20px !important;
+}
+
+.user-post-box {
+    margin-top: $home-margin;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .fullname {
+        padding: 11px;
+        text-align: center;
+        width: 100%;
+        font-size: 1.4rem;
+    }
+    .email {
+        font-size: .9rem;
+        color: rgba(0, 0, 0, .7)
+    }
+    .profile-img {      
+        height: 200px;
+        width: 200px;
+        text-align: center;
+        margin-top: -100px;
+        border-radius: 50%;
+        border: 7px solid whitesmoke;
+        background-position: center center;
+        background-size: cover;
+    }
+}
+
+.box-comments {
+    margin: 0 5%;
+    .title {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+}
+
+.comment-box {
+    margin: 2% 5%;
+
 }

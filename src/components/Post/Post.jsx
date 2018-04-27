@@ -14,7 +14,7 @@ const styles = {
 
 class Post extends Component {
   render() {
-    const { post } = this.props;
+    const { post, single } = this.props;
     return (
       <div className="post-box">
         <Card>
@@ -52,23 +52,28 @@ class Post extends Component {
             </div>
             {post.description}
           </CardText>
-          <CardActions>
-            <a href={"/post/" + post._id}>
-              <FlatButton
-                className="btn-blog-primary"
-                label={<i className="fa fa-2x fa-eye" />}
-                labelPosition="before"
-                primary={true}
-              />
-            </a>
-            <a href="">
-              <FlatButton
-                className="btn-blog-primary"
-                label={<i className="fa fa-2x fa-comment" />}
-                labelPosition="before"
-                primary={true}
-              />
-            </a>
+          <CardActions className="card-action">
+            {!single && (
+              <React.Fragment>
+                <a href={"/post/" + post._id}>
+                  <FlatButton
+                    className="btn-blog-primary"
+                    label={<i className="fa fa-2x fa-eye" />}
+                    labelPosition="before"
+                    primary={true}
+                  />
+                </a>
+                <a href="">
+                  <FlatButton
+                    className="btn-blog-primary"
+                    label={<i className="fa fa-2x fa-comment" />}
+                    labelPosition="before"
+                    primary={true}
+                  />
+                </a>
+              </React.Fragment>
+            )}
+
             <div className="pull-right">{post.createdAt}</div>
           </CardActions>
         </Card>
