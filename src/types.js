@@ -133,3 +133,13 @@ export const GET_USER_BY_ID = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+  mutation CommentCreateInput($input: CommentCreateInput!) {
+    addComment(input: $input) {
+      text
+      userId
+      postId
+    }
+  }
+`;

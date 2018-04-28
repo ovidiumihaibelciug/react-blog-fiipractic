@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter, Link } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
@@ -13,8 +15,13 @@ class AddComment extends Component {
   };
 
   handleSubmit = e => {
-    e.preventSubmit();
-    //todo
+    e.preventDefault();
+    this.props.rootStore.postStore.addComment(
+      this.state.message,
+      this.props.user._id,
+      this.props.post._id
+    );
+    window.location.reload();
   };
 
   handleChange = e => {
@@ -29,7 +36,7 @@ class AddComment extends Component {
       <div className="box add-comment-section">
         <div className="title">Add Comments</div>
         <div className="comment-form">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} method="post">
             <TextField
               hintText="Message"
               multiLine={true}
@@ -49,4 +56,4 @@ class AddComment extends Component {
   }
 }
 
-export default AddComment;
+export default withRouter(inject(["rootStore"])(observer(AddComment)));

@@ -33,8 +33,10 @@ class PostContainer extends Component {
                     <i className="fa fa-comment" />
                   </div>
                 </div>
-                <AddComment />
-                {post.comments.map(comment => <Comment comment={comment} />)}
+                <AddComment post={post} user={post.user} />
+                {post.comments
+                  .reverse()
+                  .map(comment => <Comment comment={comment} />)}
               </div>
               <div className="right-side">
                 <div className="box user-post-box">

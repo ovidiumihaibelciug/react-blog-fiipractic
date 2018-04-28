@@ -4,7 +4,8 @@ import {
   GET_POSTS_PAGINATE,
   GET_ALL_TAGS,
   GET_ALL_CATEGORIES,
-  GET_POST_BY_ID
+  GET_POST_BY_ID,
+  ADD_COMMENT
 } from "../types";
 import ApolloClient from "apollo-boost";
 import { client } from "../apollo";
@@ -97,6 +98,21 @@ class PostStore {
 
     this.categories = data.postCategories;
   }
+
+  addComment(message, user, post) {
+    client
+      .mutate({
+        variables: {
+          input: {
+            text: message,
+            userId: user,
+            postId: post
+          }
+        },
+        mutation: ADD_COMMENT
+      })
+      .then(result => console.log(result));
+  }
 }
 
 decorate(PostStore, {
@@ -113,7 +129,8 @@ decorate(PostStore, {
   getAllTags: action,
   getAllCategories: action,
   getPostsByCategoryPaginate: action,
-  getPostsByTagPaginate: action
+  getPostsByTagPaginate: action,
+  addComment: action
 });
 
 export default PostStore;
