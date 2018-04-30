@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import TextField from "material-ui/TextField";
+
+import Avatar from "material-ui/Avatar";
+import Chip from "material-ui/Chip";
 import RaisedButton from "material-ui/RaisedButton";
-import { withApollo } from "react-apollo";
+import TextField from "material-ui/TextField";
+
 import Navbar from "../components/Navbar";
 import Post from "../components/Post/Post";
-import Chip from "material-ui/Chip";
-import Avatar from "material-ui/Avatar";
-import SecondNavbar from "../components/SecondNavbar";
 import PostsFeed from "../containers/PostsFeed";
+import SecondNavbar from "../components/SecondNavbar";
+import SideSection from "../components/Post/SideSection";
+import SideSectionItem from "../components/Post/SideSectionItem";
 
 const styles = {
     chip: {
@@ -97,58 +100,20 @@ class HomeContainer extends Component {
                         <div className="left-side">
                             <SecondNavbar categories={categories} title={"All categories"} />
                             <PostsFeed category={this.props.match.params.category} page={this.props.match.params.page} />
-                            {/* {postStore.posts.map(post => {
-                                return <Post post={post} />;
-                            })} */}
                             <div className="post-links">{output}</div>
                         </div>
-                        <div className="right-side">
-                            <div className="box tags-box">
-                                <div className="title">Tags</div>
-                                <div className="tags">
-                                    {postStore.tags.map(tag => (
-                                        <a href={/tag/ + tag._id} className="tag">
-                                            <Chip
-                                                backgroundColor={styles.bcolor}
-                                                style={styles.chip}
-                                                labelColor="#fff"
-                                            >
-                                                <Avatar
-                                                    size={32}
-                                                    color="#fff"
-                                                    backgroundColor="#8c67ef"
-                                                >
-                                                    {tag.name.substr(0, 2).toUpperCase()}
-                                                </Avatar>
-                                                {tag.name}
-                                            </Chip>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="box categories-box">
-                                <div className="title">Categories</div>
-                                <div className="categories">
-                                    {postStore.categories.map(category => (
-                                        <a href={/category/ + category._id} className="category">
-                                            <Chip
-                                                backgroundColor="#8c67ef"
-                                                style={styles.chip}
-                                                labelColor="#fff"
-                                            >
-                                                <Avatar
-                                                    size={32}
-                                                    color="#fff"
-                                                    backgroundColor={styles.bcolor}
-                                                >
-                                                    {category.name.substr(0, 2).toUpperCase()}
-                                                </Avatar>
-                                                {category.name}
-                                            </Chip>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
+                        <div className="home-items-section right-side">
+                            <SideSection title="Tags">
+                                {postStore.tags.map(tag => (
+                                    <SideSectionItem item={tag} role="tag"></SideSectionItem>
+                                ))}
+                            </SideSection>
+
+                            <SideSection title="Categories">
+                                {postStore.categories.map(category => (
+                                    <SideSectionItem item={category} role="category"></SideSectionItem>
+                                ))}
+                            </SideSection>
                         </div>
                     </div>
                 </div>

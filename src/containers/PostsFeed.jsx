@@ -11,14 +11,15 @@ class PostsFeed extends Component {
     }
 
     async posts(skip, category, limit = 5) {
+        skip = skip ? skip : 0;
         const {
             data
         } = await client.query({
             query: GET_POSTS_PAGINATE,
             variables: {
                 options: {
-                    skip: skip,
-                    limit: limit,
+                    skip: parseInt(skip),
+                    limit: parseInt(limit),
                     sort: {
                         createdAt: -1
                     }

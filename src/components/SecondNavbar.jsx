@@ -14,7 +14,7 @@ class SecondNavbar extends Component {
           </a>
                     {categories.map(category => {
                         let activeClass =
-                            category._id == this.props.match.params.category
+                            category._id === this.props.match.params.category
                                 ? "active-secnav"
                                 : "";
                         return (
