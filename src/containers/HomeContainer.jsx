@@ -8,6 +8,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 
 import Navbar from "../components/Navbar";
+import Pagination from '../components/Pagination';
 import Post from "../components/Post/Post";
 import PostsFeed from "../containers/PostsFeed";
 import SecondNavbar from "../components/SecondNavbar";
@@ -47,51 +48,30 @@ class HomeContainer extends Component {
         this.props.rootStore.postStore.getAllCategories();
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { match, rootStore } = nextProps;
+        // console.log(nextProps);
+
+    }
+
     render() {
-        // let userStore = this.props.rootStore.userStore;
-        console.log(this.props.match);
-        let postStore = this.props.rootStore.postStore;
-        const categories = this.props.rootStore.postStore.categories;
-        const page = this.props.match.params.page
-            ? parseInt(this.props.match.params.page)
-            : 1;
-        let path;
-        if (!this.props.match.params.category && !this.props.match.params.tag) {
-            path = "/home/";
-        } else if (this.props.match.params.category) {
-            path = "/category/" + this.props.match.params.category + "/";
+        let { rootStore, match } = this.props;
+        let postStore = rootStore.postStore;
+        const categories = postStore.categories;
+        let { page, category, tag } = match.params;
+        let role;
+        let ival;
+        if (!tag && !category) {
+            role = 'home';
+            ival = 0;
+        } else if (tag) {
+            role = 'tag';
+            ival = tag;
         } else {
-            path = "/tag/" + this.props.match.params.tag + "/";
+            role = 'category';
+            ival = category;
         }
-
-        let output = [];
-
-        if (page === 1) {
-            output = [
-                <a href={path + page} className="page-active">
-                    {page}
-                </a>,
-                <a href={path + (page + 1)}>{page + 1}</a>,
-                <a href={path + (page + 2)}>{page + 2}</a>,
-                <a href={path + (page + 3)}>
-                    <i className="fa fa-arrow-right" />
-                </a>
-            ];
-        } else {
-            output = [
-                <a href={path + (page - 2)}>
-                    <i className="fa fa-arrow-left" />
-                </a>,
-                <a href={path + (page - 1)}>{page - 1}</a>,
-                <a href={path + page} className="page-active">
-                    {page}
-                </a>,
-                <a href={path + (page + 1)}>{page + 1}</a>,
-                <a href={path + (page + 2)}>
-                    <i className="fa fa-arrow-right" />
-                </a>
-            ];
-        }
+        page = page ? parseInt(page) : 1;
 
         return (
             <div className="home-box">
@@ -99,8 +79,11 @@ class HomeContainer extends Component {
                     <div className="flex-row">
                         <div className="left-side">
                             <SecondNavbar categories={categories} title={"All categories"} />
-                            <PostsFeed category={this.props.match.params.category} page={this.props.match.params.page} />
-                            <div className="post-links">{output}</div>
+                            <PostsFeed category={category} page={page} />
+                            <div className="post-links">
+                                {/* role 0 -> home */}
+                                <Pagination role={role} page={page} ival={ival} />
+                            </div>
                         </div>
                         <div className="home-items-section right-side">
                             <SideSection title="Tags">

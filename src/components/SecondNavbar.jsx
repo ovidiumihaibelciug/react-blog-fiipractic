@@ -9,9 +9,9 @@ class SecondNavbar extends Component {
             <div className="secondary-nav">
                 <div className="secondary-nav-start">{title}</div>
                 <div className="secondary-nav-end">
-                    <a href={"/home"} className={"navbar-item"}>
+                    <Link to="/home" className={"navbar-item"}>
                         All categories
-          </a>
+                    </Link>
                     {categories.map(category => {
                         let activeClass =
                             category._id === this.props.match.params.category
