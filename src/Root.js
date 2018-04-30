@@ -1,7 +1,7 @@
 import React from "react";
 
 // router
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { routes } from "../src/routes";
 import createBrowserHistory from "history/createBrowserHistory";
 
@@ -26,15 +26,17 @@ const history = createBrowserHistory();
 const Root = () => (
   <ApolloProvider client={client}>
     <Provider rootStore={new RootStore()}>
-      <Router history={history}>
-        <MuiThemeProvider>
-          <React.Fragment>
-            {routes.map(route => (
-              <Route exact path={route.path} component={route.component} />
-            ))}
-          </React.Fragment>
-        </MuiThemeProvider>
-      </Router>
+      <MuiThemeProvider>
+        <Router history={history}>
+          <Switch>
+            <React.Fragment>
+              {routes.map(route => (
+                <Route exact path={route.path} component={route.component} />
+              ))}
+            </React.Fragment>
+          </Switch>
+        </Router>
+      </MuiThemeProvider>
     </Provider>
   </ApolloProvider>
 );

@@ -4,7 +4,7 @@ import ApolloClient from "apollo-boost";
 import { client } from "../apollo";
 import { filter } from "async";
 
-class PostStore {
+class GroupStore {
   loading = true;
   groups = [];
   group = {};
@@ -18,11 +18,11 @@ class PostStore {
   }
 }
 
-decorate(PostStore, {
+decorate(GroupStore, {
   loading: observable,
   groups: observable,
   group: observable,
   getGroups: action
 });
 
-export default PostStore;
+export default GroupStore;

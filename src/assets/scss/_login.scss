@@ -13,7 +13,7 @@
         display: flex;
         .left-side {
             height: 100%;
-            background-color: rgba(rgb(50, 135, 255), .8);
+            background-color: $secondary;
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
             text-align: center;
@@ -24,6 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 10px;
         }
         .right-side {
             flex: 7;
@@ -36,7 +37,7 @@
                 display: grid;
                 grid-template-rows: 20% 60% auto;
                 .title {
-                    color: rgba(rgb(50, 135, 255), .8);
+                    color: $secondary;
                     font-size: 1.5rem;
                 }
                 .fields {

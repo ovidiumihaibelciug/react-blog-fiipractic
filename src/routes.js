@@ -4,6 +4,7 @@ import PostView from "./views/PostView";
 import Groups from "./views/Groups";
 import Group from "./views/Group";
 import Profile from "./views/Profile";
+import AddPost from "./views/AddPost";
 
 export const routes = [
   {
@@ -53,5 +54,9 @@ export const routes = [
   {
     path: "/tag/:tag/:page",
     component: Home
+  },
+  {
+    path: "/addpost",
+    component: AddPost
   }
 ];

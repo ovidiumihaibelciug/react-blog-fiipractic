@@ -6,10 +6,10 @@ import { withRouter } from "react-router-dom";
 
 const styles = {
   underlineStyle: {
-    borderColor: "#4994F6"
+    borderColor: "#7957D5"
   },
   floatingLabelFocusStyle: {
-    color: "#4994F6"
+    color: "#7957D5"
   }
 };
 
@@ -52,7 +52,7 @@ class LoginContainer extends Component {
               <RaisedButton
                 type="submit"
                 label="Log in"
-                backgroundColor="#4994F6"
+                backgroundColor="#7957D5"
                 fullWidth={true}
                 labelColor="white"
               />
