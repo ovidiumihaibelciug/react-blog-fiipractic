@@ -1,19 +1,19 @@
 import gql from "graphql-tag";
 
-export const GET_POSTS = gql`
-  {
-    posts {
-      _id
-      title
-      description
-      user {
-        _id
-        firstname
-        lastname
-      }
-    }
-  }
-`;
+// export const GET_POSTS = gql`
+//   {
+//     posts {
+//       _id
+//       title
+//       description
+//       user {
+//         _id
+//         firstname
+//         lastname
+//       }
+//     }
+//   }
+// `;
 
 export const GET_POSTS_PAGINATE = gql`
   query($filters: JSON, $options: JSON) {
@@ -97,7 +97,7 @@ export const GET_POST_BY_ID = gql`
 
 export const GET_GROUPS = {};
 
-export const GET_USER_BY_ID = gql`
+export const GET_USER = gql`
   query($filters: JSON, $options: JSON) {
     users(filters: $filters, options: $options) {
       _id
@@ -134,12 +134,27 @@ export const GET_USER_BY_ID = gql`
   }
 `;
 
+// export const GET_ALL_COMMENTS_BY_USER =
+
 export const ADD_COMMENT = gql`
-  mutation CommentCreateInput($input: CommentCreateInput!) {
-    addComment(input: $input) {
-      text
-      userId
-      postId
+    mutation CommentCreateInput($input: CommentCreateInput!) {
+        addComment(input: $input) {
+            text
+            userId
+            postId
+        }
     }
-  }
 `;
+
+export const ADD_POST = gql`
+    mutation PostCreateInput($input: PostCreateInput!){
+        addPost(input: $input) {
+        title
+        description
+        categoryId
+        userId
+        tagIds
+        }
+    }
+`;
+

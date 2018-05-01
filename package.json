@@ -8,6 +8,7 @@
     "font-awesome": "^4.7.0",
     "npm-run-all": "^4.1.2",
     "react": "^16.3.2",
+    "react-chips": "^0.6.4",
     "react-dom": "^16.3.2",
     "react-flexbox-grid": "^2.0.0",
     "react-scripts": "1.1.4"

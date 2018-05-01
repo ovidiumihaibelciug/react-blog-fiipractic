@@ -10,7 +10,8 @@ import {
     GET_ALL_TAGS,
     GET_ALL_CATEGORIES,
     GET_POST_BY_ID,
-    ADD_COMMENT
+    ADD_COMMENT,
+    ADD_POST
 } from "../types";
 import ApolloClient from "apollo-boost";
 import {
@@ -37,7 +38,7 @@ class PostStore {
         const {
             data
         } = await client.query({
-            query: GET_POSTS
+            query: GET_POSTS_PAGINATE
         });
         this.posts = data.posts;
         this.loading = false;
@@ -155,6 +156,25 @@ class PostStore {
                     }
                 },
                 mutation: ADD_COMMENT
+            })
+            .then(result => console.log(result));
+    }
+
+    addPost(state, user) {
+        const { title, description, category, tag } = state;
+        user = "sBPKwyzLSZABqdQPD";
+        client
+            .mutate({
+                variables: {
+                    input: {
+                        title: title,
+                        description: description,
+                        categoryId: category,
+                        tagIds: [tag],
+                        userId: user
+                    }
+                },
+                mutation: ADD_POST
             })
             .then(result => console.log(result));
     }

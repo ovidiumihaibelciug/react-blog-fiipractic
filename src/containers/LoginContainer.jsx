@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
-import { withRouter } from "react-router-dom";
 
 const styles = {
     underlineStyle: {
@@ -14,18 +16,39 @@ const styles = {
 
 class LoginContainer extends Component {
     state = {
-        username: "",
-        password: ""
+        email: "",
+        password: "",
+        errors: []
     };
 
-    handleSubmit = () => {
-        // validation -> check just username
-        // if validation
-        this.props.history.push("/home");
-        // else alert
+    handleSubmit = e => {
+        e.preventDefault();
+        const { userStore } = this.props.rootStore;
+        const { email, password } = this.state;
+        const { history } = this.props;
+        let errors = [];
+
+        userStore.getUSerByEmail(email);
+
+        if (userStore.loggedUser !== 0) {
+            let loggedUser = JSON.parse(localStorage.getItem('user'));
+            console.log("USERRRRRR:", JSON.parse(localStorage.getItem('user')));
+
+            history.push('/home');
+        } else {
+            errors = [...errors, 'Wrong email'];
+            this.setState({ errors });
+        }
     };
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
 
     render() {
+        const { email, password, errors } = this.state;
         return (
             <div className="login-box">
                 <div className="left-side"> Lorem ipsum dolor sit amet. </div>
@@ -34,17 +57,24 @@ class LoginContainer extends Component {
                         <div className="title">Log in</div>
                         <div className="fields">
                             <TextField
-                                hintText="Username"
-                                name="username"
+                                value={email}
+                                onChange={this.handleChange}
+                                type="email"
+                                hintText="Email"
+                                name="email"
                                 underlineFocusStyle={styles.underlineStyle}
+                                errorText={errors[0]}
                             />
                             <TextField
                                 hintText="Password"
                                 floatingLabelText="Password"
+                                value={password}
+                                onChange={this.handleChange}
                                 name="password"
                                 type="password"
                                 underlineFocusStyle={styles.underlineStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                errorText={errors[0]}
                             />
                         </div>
                         <div>
@@ -64,4 +94,4 @@ class LoginContainer extends Component {
     }
 }
 
-export default withRouter(LoginContainer);
+export default withRouter(inject(["rootStore"])(observer(LoginContainer)));

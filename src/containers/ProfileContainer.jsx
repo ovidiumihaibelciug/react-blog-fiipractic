@@ -13,14 +13,19 @@ const styles = {
 
 class ProfileContainer extends Component {
     componentWillMount() {
-        const id = this.props.match.params.id;
-        if (id) {
-            this.props.rootStore.userStore.getUserById(id);
-        }
+        const { id } = this.props.match.params;
+        const user = JSON.parse(localStorage.getItem('user'));
+        const { userStore } = this.props.rootStore;
+
+        const req_id = id ? id : user.id;
+        userStore.getUserById(req_id);
     }
 
     render() {
-        let { user } = this.props.rootStore.userStore;
+        const { id } = this.props.match.params;
+        const { userStore } = this.props.rootStore;
+        const user = id ? userStore.user : JSON.parse(localStorage.getItem('user'));
+
         return (
             <div className="container user-container">
                 {!user.groups && !user.posts ? (

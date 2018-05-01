@@ -24,43 +24,23 @@ const styles = {
 
 class HomeContainer extends Component {
     componentWillMount() {
-        const { match, rootStore } = this.props;
-
-        const page = this.props.match.params.page
-            ? this.props.match.params.page
-            : 1;
-        const category = this.props.match.params.category
-            ? this.props.match.params.category
-            : 0;
-        const tag = this.props.match.params.tag ? this.props.match.params.tag : 0;
-
-        if (!category && !tag) {
-            this.props.rootStore.postStore.getPostsPaginate(page * 10);
-        } else if (category) {
-            this.props.rootStore.postStore.getPostsByCategoryPaginate(
-                page * 10,
-                category
-            );
-        } else if (tag) {
-            this.props.rootStore.postStore.getPostsByTagPaginate(page * 10, tag);
-        }
-        this.props.rootStore.postStore.getAllTags();
-        this.props.rootStore.postStore.getAllCategories();
+        const { postStore } = this.props.rootStore;
+        postStore.getAllTags();
+        postStore.getAllCategories();
+        const user = localStorage.getItem('loggedUser');
+        console.log(user[0]);
     }
 
-    componentWillReceiveProps(nextProps) {
-        const { match, rootStore } = nextProps;
-        // console.log(nextProps);
-
-    }
 
     render() {
         let { rootStore, match } = this.props;
         let postStore = rootStore.postStore;
-        const categories = postStore.categories;
+        const { categories, tags } = postStore;
         let { page, category, tag } = match.params;
+        const user = JSON.parse(localStorage.getItem('user'));
         let role;
         let ival;
+
         if (!tag && !category) {
             role = 'home';
             ival = 0;
@@ -72,14 +52,13 @@ class HomeContainer extends Component {
             ival = category;
         }
         page = page ? parseInt(page) : 1;
-
         return (
             <div className="home-box">
                 <div className="container">
                     <div className="flex-row">
                         <div className="left-side">
                             <SecondNavbar categories={categories} title={"All categories"} />
-                            <PostsFeed category={category} page={page} />
+                            <PostsFeed category={category} tag={tag} page={page} />
                             <div className="post-links">
                                 {/* role 0 -> home */}
                                 <Pagination role={role} page={page} ival={ival} />
@@ -87,13 +66,13 @@ class HomeContainer extends Component {
                         </div>
                         <div className="home-items-section right-side">
                             <SideSection title="Tags">
-                                {postStore.tags.map(tag => (
+                                {tags.map(tag => (
                                     <SideSectionItem item={tag} role="tag"></SideSectionItem>
                                 ))}
                             </SideSection>
 
                             <SideSection title="Categories">
-                                {postStore.categories.map(category => (
+                                {categories.map(category => (
                                     <SideSectionItem item={category} role="category"></SideSectionItem>
                                 ))}
                             </SideSection>

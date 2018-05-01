@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { GET_POSTS_PAGINATE } from '../types';
+import { GET_POSTS, GET_POSTS_PAGINATE } from '../types';
 import { client } from '../apollo';
 import Post from '../components/Post/Post';
 
@@ -10,13 +10,20 @@ class PostsFeed extends Component {
         posts: {}
     }
 
-    async posts(skip, category, limit = 5) {
+    async posts(skip, tag, category, limit = 5) {
         skip = skip ? skip : 0;
-        const {
-            data
-        } = await client.query({
-            query: GET_POSTS_PAGINATE,
-            variables: {
+        const variables = category ? {
+            options: {
+                skip: parseInt(skip),
+                limit: parseInt(limit),
+                sort: {
+                    createdAt: -1
+                }
+            },
+            filters: {
+                categoryId: category
+            }
+        } : {
                 options: {
                     skip: parseInt(skip),
                     limit: parseInt(limit),
@@ -25,9 +32,14 @@ class PostsFeed extends Component {
                     }
                 },
                 filters: {
-                    categoryId: category
+                    tagIds: tag
                 }
-            }
+            };
+        const {
+            data
+        } = await client.query({
+            query: GET_POSTS_PAGINATE,
+            variables: variables
         });
         let newPosts = data.posts;
         this.setState({
@@ -36,15 +48,32 @@ class PostsFeed extends Component {
         });
     }
 
+    async getPosts() {
+        console.log("1");
+        const {
+            data
+        } = await client.query({
+            query: GET_POSTS_PAGINATE
+        });
+        this.setState({
+            posts: data.posts,
+            loading: false
+        });
+    }
 
     componentWillReceiveProps(nextProps) {
-        const { page, category } = nextProps;
-        this.posts(page * 10, category);
+        const { page, category, tag } = nextProps;
+        if (!category && !tag) {
+            this.getPosts();
+        } else {
+            this.posts(page * 10, tag, category);
+        }
     }
 
     render() {
         return (
             <section className="section-postsfeed">
+
                 {
                     !this.state.loading && this.state.posts.map(post => {
                         return <Post post={post}></Post>

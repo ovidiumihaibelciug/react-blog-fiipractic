@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import { withRouter, Link, NavLink } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-import { NavLink } from "react-router-dom";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
     render() {
+        const { userStore } = this.props.rootStore;
+        const user = JSON.parse(localStorage.getItem('user'));
         return (
             <React.Fragment>
                 <nav className="navbar">
@@ -34,16 +37,16 @@ export default class Navbar extends Component {
               </NavLink> */}
                             <NavLink to="/home" className="navbar-item navbar-dropdown">
                                 Home
-              </NavLink>
+                            </NavLink>
                             <NavLink to="/addpost" className="navbar-item navbar-dropdown">
                                 Add a post
-              </NavLink>
+                            </NavLink>
                             <div className="navbar-item navbar-dropdown">
-                                <span>Hello, Ovidiu</span>
+                                <span>Hello, {user.firstname + " " + user.lastname}</span>
                                 <div className="dropdown-content">
                                     <NavLink to={"/profile"} exact className="dropdown-link">
                                         <i className="fa fa-user" /> &nbsp; My Profile
-                  </NavLink>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
@@ -53,3 +56,5 @@ export default class Navbar extends Component {
         );
     }
 }
+
+export default withRouter(inject(["rootStore"])(observer(Navbar)));

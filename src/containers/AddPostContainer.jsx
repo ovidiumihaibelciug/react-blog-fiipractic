@@ -4,6 +4,8 @@ import { inject, observer } from "mobx-react";
 
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
+import MenuItem from "material-ui/MenuItem";
+import SelectField from "material-ui/SelectField";
 
 const style = {
     borderColor: "#8c67ef"
@@ -11,19 +13,30 @@ const style = {
 
 class AddPostContainer extends Component {
     state = {
-        text: "",
-        title: ""
+        title: "",
+        description: "",
+        category: null,
+        tag: null,
     };
 
-    //   handleSubmit = e => {
-    //     e.preventDefault();
-    //     this.props.rootStore.postStore.addComment(
-    //       this.state.message,
-    //       this.props.user._id,
-    //       this.props.post._id
-    //     );
-    //     window.location.reload();
-    //   };
+    componentWillMount() {
+        const { rootStore } = this.props;
+        rootStore.postStore.getAllTags();
+        rootStore.postStore.getAllCategories();
+        console.log("TAG", rootStore.postStore.tags);
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        const { user, post, history } = this.props;
+
+        this.props.rootStore.postStore.addPost(
+            this.state,
+            user,
+            post
+        )
+        history.push('/profile/' + "sBPKwyzLSZABqdQPD");
+    };
 
     handleChange = e => {
         this.setState({
@@ -31,8 +44,22 @@ class AddPostContainer extends Component {
         });
     };
 
+    handleCategoryChange = (event, index, value) => {
+        console.log(event.ref);
+        this.setState({
+            category: value
+        });
+    }
+
+    handleTagChange = (event, index, value) => {
+        this.setState({
+            tag: value
+        });
+    }
+
     render() {
-        let { text, title } = this.state;
+        let { title, description, category, tag } = this.state;
+        const { tags, categories } = this.props.rootStore.postStore;
         return (
             <div className="box add-comment-section">
                 <div className="title">Add Post</div>
@@ -47,17 +74,44 @@ class AddPostContainer extends Component {
                             onChange={this.handleChange}
                         />
                         <TextField
-                            hintText="Text"
-                            multiLine={true}
-                            rows={2}
-                            rowsMax={4}
+                            hintText="Description"
                             fullWidth={true}
                             underlineFocusStyle={style}
-                            name="text"
-                            value={text}
+                            name="description"
+                            value={description}
                             onChange={this.handleChange}
                         />
-                        <RaisedButton type="submit" label="Add post" fullWidth={true} />
+                        <SelectField
+                            floatingLabelText="Category"
+                            value={category}
+                            name="category"
+                            onChange={this.handleCategoryChange}
+                            fullWidth={true}
+                            underlineFocusStyle={style}
+                        >
+                            <MenuItem value={null} primaryText="" />
+                            {
+                                categories.map(category => (
+                                    <MenuItem value={category._id} primaryText={category.name} />
+                                ))
+                            }
+                        </SelectField>
+                        <SelectField
+                            floatingLabelText="Tag"
+                            name="tag"
+                            value={tag}
+                            onChange={this.handleTagChange}
+                            fullWidth={true}
+                            underlineFocusStyle={style}
+                        >
+                            {
+                                tags.map(tag => (
+                                    <MenuItem value={tag._id} primaryText={tag.name} />
+                                ))
+                            }
+                        </SelectField>
+
+                        <RaisedButton type="submit" backgroundColor="#8c67ef" labelColor="#fff" label="Add post" fullWidth={true} />
                     </form>
                 </div>
             </div>
