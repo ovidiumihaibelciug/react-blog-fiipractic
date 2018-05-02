@@ -1,34 +1,18 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import Avatar from "material-ui/Avatar";
-import Chip from "material-ui/Chip";
-import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
-
-import Navbar from "../components/Navbar";
 import Pagination from '../components/Pagination';
-import Post from "../components/Post/Post";
 import PostsFeed from "../containers/PostsFeed";
 import SecondNavbar from "../components/SecondNavbar";
 import SideSection from "../components/Post/SideSection";
 import SideSectionItem from "../components/Post/SideSectionItem";
-
-const styles = {
-    chip: {
-        margin: 5
-    },
-    bcolor: "#7957D5"
-};
 
 class HomeContainer extends Component {
     componentWillMount() {
         const { postStore } = this.props.rootStore;
         postStore.getAllTags();
         postStore.getAllCategories();
-        const user = localStorage.getItem('loggedUser');
-        console.log(user[0]);
     }
 
 
@@ -37,7 +21,6 @@ class HomeContainer extends Component {
         let postStore = rootStore.postStore;
         const { categories, tags } = postStore;
         let { page, category, tag } = match.params;
-        const user = JSON.parse(localStorage.getItem('user'));
         let role;
         let ival;
 
@@ -67,13 +50,13 @@ class HomeContainer extends Component {
                         <div className="home-items-section right-side">
                             <SideSection title="Tags">
                                 {tags.map(tag => (
-                                    <SideSectionItem item={tag} role="tag"></SideSectionItem>
+                                    <SideSectionItem key={tag._id} item={tag} role="tag"></SideSectionItem>
                                 ))}
                             </SideSection>
 
                             <SideSection title="Categories">
                                 {categories.map(category => (
-                                    <SideSectionItem item={category} role="category"></SideSectionItem>
+                                    <SideSectionItem key={category._id} item={category} role="category"></SideSectionItem>
                                 ))}
                             </SideSection>
                         </div>

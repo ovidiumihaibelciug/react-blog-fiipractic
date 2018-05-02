@@ -1,11 +1,9 @@
 import {
     observable,
     action,
-    computed,
     decorate
 } from "mobx";
 import {
-    GET_POSTS,
     GET_POSTS_PAGINATE,
     GET_ALL_TAGS,
     GET_ALL_CATEGORIES,
@@ -13,28 +11,23 @@ import {
     ADD_COMMENT,
     ADD_POST
 } from "../types";
-import ApolloClient from "apollo-boost";
 import {
     client
 } from "../apollo";
-import {
-    filter
-} from "async";
 
 class PostStore {
     loading = true;
-    text = "Lorem ipsum dolor situm";
     posts = [];
     post = "";
     tags = [];
     categories = [];
+    titles = [];
 
     handleLoading() {
         this.loading = !this.loading;
     }
 
     async getPosts() {
-        console.log("1");
         const {
             data
         } = await client.query({
@@ -162,7 +155,6 @@ class PostStore {
 
     addPost(state, user) {
         const { title, description, category, tag } = state;
-        user = "sBPKwyzLSZABqdQPD";
         client
             .mutate({
                 variables: {
@@ -187,8 +179,10 @@ decorate(PostStore, {
     post: observable,
     tags: observable,
     categories: observable,
+    titles: observable,
     handleLoading: action,
     getPosts: action,
+    getPostsTitles: action,
     getPostsPaginate: action,
     getPostById: action,
     getAllTags: action,

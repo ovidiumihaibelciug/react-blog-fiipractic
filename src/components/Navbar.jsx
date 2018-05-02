@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { withRouter, Link, NavLink } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
+import NavSearch from '../components/NavSearch';
 
 class Navbar extends Component {
     render() {
-        const { userStore } = this.props.rootStore;
         const user = JSON.parse(localStorage.getItem('user'));
         return (
             <React.Fragment>
@@ -13,28 +13,9 @@ class Navbar extends Component {
                     <div className="container">
                         <div className="navbar-start">
                             <div className="navbar-brand">Brand</div>
-                            <div className="navbar-search">
-                                <i className="fa fa-search" />
-                                <input type="text" placeholder="Search..." />
-                            </div>
+                            {/* <NavSearch /> */}
                         </div>
                         <div className="navbar-end">
-                            {/* <NavLink
-                to="/"
-                exact
-                className="navbar-item"
-                activeClassName="active-item"
-              >
-                Login
-              </NavLink>
-              <NavLink
-                to="/register"
-                exact
-                className="navbar-item"
-                activeClassName="active-item"
-              >
-                Register
-              </NavLink> */}
                             <NavLink to="/home" className="navbar-item navbar-dropdown">
                                 Home
                             </NavLink>
@@ -46,6 +27,9 @@ class Navbar extends Component {
                                 <div className="dropdown-content">
                                     <NavLink to={"/profile"} exact className="dropdown-link">
                                         <i className="fa fa-user" /> &nbsp; My Profile
+                                    </NavLink>
+                                    <NavLink to={"/login"} exact className="dropdown-link">
+                                        <i className="fa fa-user" /> &nbsp; Log out
                                     </NavLink>
                                 </div>
                             </div>

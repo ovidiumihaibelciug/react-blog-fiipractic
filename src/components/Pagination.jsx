@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Pagination = ({ role, page, ival }) => {
@@ -6,24 +6,24 @@ const Pagination = ({ role, page, ival }) => {
     //example: /path/4
     let path = role !== 'home' ? '/' + role + '/' + ival + '/' : '/home/'
     output = page === 1 ? output = [
-        <Link to={path + page} className="page-active">
+        <Link key={1} to={path + page} className="page-active">
             {page}
         </Link>,
-        <Link to={path + (page + 1)}>{page + 1}</Link>,
-        <Link to={path + (page + 2)}>{page + 2}</Link>,
-        <Link to={path + (page + 3)}>
+        <Link key={2} to={path + (page + 1)}>{page + 1}</Link>,
+        <Link key={3} to={path + (page + 2)}>{page + 2}</Link>,
+        <Link key={4} to={path + (page + 3)}>
             <i className="fa fa-arrow-right" />
         </Link>
     ] : output = [
-        <Link to={path + (page - 1)}>
+        <Link key={5} to={path + (page - 1)}>
             <i className="fa fa-arrow-left" />
         </Link>,
-        <Link to={path + (page - 1)}>{page - 1}</Link>,
-        <Link to={path + page} className="page-active">
+        <Link key={6} to={path + (page - 1)}>{page - 1}</Link>,
+        <Link key={7} to={path + page} className="page-active">
             {page}
         </Link>,
-        <Link to={path + (page + 1)}>{page + 1}</Link>,
-        <Link to={path + (page + 2)}>
+        <Link key={8} to={path + (page + 1)}>{page + 1}</Link>,
+        <Link key={9} to={path + (page + 2)}>
             <i className="fa fa-arrow-right" />
         </Link>
     ];

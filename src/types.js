@@ -38,6 +38,14 @@ export const GET_POSTS_PAGINATE = gql`
     }
   }
 `;
+export const GET_POSTS_TITLES = gql`
+  query($filters: JSON, $options: JSON) {
+    posts(filters: $filters, options: $options) {
+      _id
+      title
+    }
+  }
+`;
 
 export const GET_ALL_TAGS = gql`
   query($filters: JSON, $options: JSON) {

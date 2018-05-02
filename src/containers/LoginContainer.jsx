@@ -24,16 +24,13 @@ class LoginContainer extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const { userStore } = this.props.rootStore;
-        const { email, password } = this.state;
+        const { email } = this.state;
         const { history } = this.props;
         let errors = [];
 
         userStore.getUSerByEmail(email);
 
         if (userStore.loggedUser !== 0) {
-            let loggedUser = JSON.parse(localStorage.getItem('user'));
-            console.log("USERRRRRR:", JSON.parse(localStorage.getItem('user')));
-
             history.push('/home');
         } else {
             errors = [...errors, 'Wrong email'];

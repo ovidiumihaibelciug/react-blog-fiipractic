@@ -47,7 +47,7 @@ class ProfileContainer extends Component {
                                 <h3 className="title">{user.firstname + " " + user.lastname}</h3>
                                 <div className="subtitle">{user.email}</div>
                                 <div className="user-posts">Posts</div>
-                                {user.posts.map(
+                                {user.posts.reverse().map(
                                     post => (!post.category ? "" : <Post post={post} />)
                                 )}
                             </div>

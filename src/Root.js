@@ -17,7 +17,6 @@ import { ApolloProvider } from "react-apollo";
 
 // import { client } from "./apollo";
 
-import ApolloClient from "apollo-boost";
 
 import { client } from "./apollo";
 

@@ -28,14 +28,14 @@ class AddPostContainer extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const { user, post, history } = this.props;
+        const { history } = this.props;
+        const user = JSON.parse(localStorage.getItem('user'));
 
         this.props.rootStore.postStore.addPost(
             this.state,
-            user,
-            post
+            user._id
         )
-        history.push('/profile/' + "sBPKwyzLSZABqdQPD");
+        history.push('/profile/' + user._id);
     };
 
     handleChange = e => {

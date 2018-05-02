@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 
 import { Card, CardActions, CardTitle, CardText } from "material-ui/Card";
@@ -35,6 +35,7 @@ const Post = ({ post, single }) => {
                                     backgroundColor={styles.bcolor}
                                     style={styles.chip}
                                     labelColor="#fff"
+                                    key={tag._id}
                                 >
                                     {tag.name}
                                 </Chip>

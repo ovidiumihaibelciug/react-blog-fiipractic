@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { GET_POSTS, GET_POSTS_PAGINATE } from '../types';
+import { GET_POSTS_PAGINATE } from '../types';
 import { client } from '../apollo';
 import Post from '../components/Post/Post';
 
@@ -14,8 +14,8 @@ class PostsFeed extends Component {
         skip = skip ? skip : 0;
         const variables = category ? {
             options: {
-                skip: parseInt(skip),
-                limit: parseInt(limit),
+                skip: skip,
+                limit: limit,
                 sort: {
                     createdAt: -1
                 }
@@ -25,8 +25,8 @@ class PostsFeed extends Component {
             }
         } : {
                 options: {
-                    skip: parseInt(skip),
-                    limit: parseInt(limit),
+                    skip: skip,
+                    limit: limit,
                     sort: {
                         createdAt: -1
                     }
@@ -48,12 +48,19 @@ class PostsFeed extends Component {
         });
     }
 
-    async getPosts() {
-        console.log("1");
+    async getPosts(page, limit = 10) {
+        const variables = {
+            options: {
+                skip: parseInt(page),
+                limit: parseInt(limit),
+            },
+        }
+
         const {
             data
         } = await client.query({
-            query: GET_POSTS_PAGINATE
+            query: GET_POSTS_PAGINATE,
+            variables: variables
         });
         this.setState({
             posts: data.posts,
@@ -64,7 +71,7 @@ class PostsFeed extends Component {
     componentWillReceiveProps(nextProps) {
         const { page, category, tag } = nextProps;
         if (!category && !tag) {
-            this.getPosts();
+            this.getPosts(page * 10, 10);
         } else {
             this.posts(page * 10, tag, category);
         }
@@ -76,7 +83,7 @@ class PostsFeed extends Component {
 
                 {
                     !this.state.loading && this.state.posts.map(post => {
-                        return <Post post={post}></Post>
+                        return <Post post={post} key={post._id} ></Post>
                     })
                 }
             </section>
