@@ -5,6 +5,12 @@ import { inject, observer } from "mobx-react";
 import NavSearch from '../components/NavSearch';
 
 class Navbar extends Component {
+
+    handleLogOut = () => {
+        // localStorage.removeItem('user');
+        //...code
+    }
+
     render() {
         const user = JSON.parse(localStorage.getItem('user'));
         return (
@@ -13,7 +19,7 @@ class Navbar extends Component {
                     <div className="container">
                         <div className="navbar-start">
                             <div className="navbar-brand">Brand</div>
-                            {/* <NavSearch /> */}
+                            <NavSearch />
                         </div>
                         <div className="navbar-end">
                             <NavLink to="/home" className="navbar-item navbar-dropdown">
@@ -28,8 +34,8 @@ class Navbar extends Component {
                                     <NavLink to={"/profile"} exact className="dropdown-link">
                                         <i className="fa fa-user" /> &nbsp; My Profile
                                     </NavLink>
-                                    <NavLink to={"/login"} exact className="dropdown-link">
-                                        <i className="fa fa-user" /> &nbsp; Log out
+                                    <NavLink to={"/login"} onClick={this.handleLogOut} exact className="dropdown-link">
+                                        <i className="fa fa-sign-out" /> &nbsp; Log out
                                     </NavLink>
                                 </div>
                             </div>

@@ -29,12 +29,13 @@ class PostContainer extends Component {
                                     />
                                     <div className="box box-comments">
                                         <div className="title">
-                                            Comments {post.comments.length + " "}
+                                            Comments {post.comments ? post.comments.length : 0 + " "}
                                             <i className="fa fa-comment" />
                                         </div>
                                     </div>
                                     <AddComment post={post} user={post.user} />
-                                    {post.comments
+
+                                    {post.comments && post.comments
                                         .reverse()
                                         .map(comment => <Comment comment={comment} />)}
                                 </div>

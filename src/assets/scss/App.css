@@ -2457,7 +2457,7 @@ a {
         border-radius: 0; }
         .navbar .container .navbar-start .navbar-search .fa-search {
           position: absolute;
-          top: 22px;
+          top: 10px;
           left: 29px;
           font-size: 20px; }
         .navbar .container .navbar-start .navbar-search input {
@@ -2760,6 +2760,11 @@ a {
       font-weight: 400;
       color: rgba(0, 0, 0, 0.5);
       border-bottom: 1px solid whitesmoke; }
+
+.nav-bar-results {
+  display: block !important;
+  overflow-y: auto;
+  max-height: 400px; }
 
 .user-container .flex-row {
   display: flex;

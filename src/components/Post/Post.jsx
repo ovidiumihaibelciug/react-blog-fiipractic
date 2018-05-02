@@ -82,4 +82,4 @@ const Post = ({ post, single }) => {
     );
 }
 
-export default Post; ``
+export default Post;

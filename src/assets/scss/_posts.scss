@@ -160,3 +160,9 @@
         }
     }
 }
+
+.nav-bar-results {
+    display: block !important;
+    overflow-y: auto;
+    max-height: 400px;
+}
