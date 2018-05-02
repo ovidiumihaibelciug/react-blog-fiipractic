@@ -28,14 +28,15 @@ class LoginContainer extends Component {
         const { history } = this.props;
         let errors = [];
 
-        userStore.getUSerByEmail(email);
+        userStore.getUSerByEmail(email).then(() => {
+            if (userStore.loggedUser !== 0) {
+                history.push('/home');
+            } else {
+                errors = [...errors, 'Wrong email'];
+                this.setState({ errors });
+            }
+        });
 
-        if (userStore.loggedUser !== 0) {
-            history.push('/home');
-        } else {
-            errors = [...errors, 'Wrong email'];
-            this.setState({ errors });
-        }
     };
 
     handleChange = e => {
