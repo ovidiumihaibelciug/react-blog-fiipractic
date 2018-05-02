@@ -142,6 +142,31 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_USERS = gql`
+    query($filters: JSON, $options: JSON) {
+        users(filters: $filters, options: $options) {
+            _id
+            email
+            lastname
+            firstname
+            firstname
+            email
+            createdAt
+            posts {
+                _id
+            }
+            comments {
+                _id
+            }
+            groups {
+                _id
+                name
+            }
+        }
+    }
+`;
+
+
 // export const GET_ALL_COMMENTS_BY_USER =
 
 export const ADD_COMMENT = gql`

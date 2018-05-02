@@ -75,7 +75,7 @@ const Post = ({ post, single }) => {
                         </React.Fragment>
                     )}
 
-                    <div className="pull-right">{post.createdAt}</div>
+                    <div className="pull-right">{(new Date(post.createdAt)).toLocaleDateString()}</div>
                 </CardActions>
             </Card>
         </div>

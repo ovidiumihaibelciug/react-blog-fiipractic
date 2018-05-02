@@ -25,6 +25,9 @@ class Navbar extends Component {
                             <NavLink to="/home" className="navbar-item navbar-dropdown">
                                 Home
                             </NavLink>
+                            <NavLink to="/users" className="navbar-item navbar-dropdown">
+                                Users
+                            </NavLink>
                             <NavLink to="/addpost" className="navbar-item navbar-dropdown">
                                 Add a post
                             </NavLink>

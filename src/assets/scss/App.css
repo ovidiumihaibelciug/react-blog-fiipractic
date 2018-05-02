@@ -2594,14 +2594,19 @@ a {
   justify-content: center;
   align-items: center;
   height: 100vh !important;
-  background-image: url("https://images.unsplash.com/photo-1461632830798-3adb3034e4c8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9943985ab543c6dc5300988f49545e73&w=1000&q=80");
+  background-image: url("https://i.pinimg.com/originals/65/0c/88/650c88db41f4bc0892c46457b2f6eaa7.jpg");
   background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  -webkit-box-shadow: 1px 0px 33px -3px rgba(0, 0, 0, 0.75);
+  z-index: -1; }
   .login-section .login-box {
     height: 60%;
     width: 60%;
-    display: flex; }
+    display: flex;
+    z-index: 99999;
+    -moz-box-shadow: 1px 0px 33px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 0px 33px -3px rgba(0, 0, 0, 0.75); }
     .login-section .login-box .left-side {
       height: 100%;
       background-color: #7957D5;
@@ -2798,3 +2803,20 @@ body {
 
 .active {
   color: #8c67ef !important; }
+
+.users-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .users-container .user-container {
+    margin: 10px;
+    width: 30%; }
+    .users-container .user-container .user-posts, .users-container .user-container .user-comments {
+      font-weight: 500; }
+      .users-container .user-container .user-posts span, .users-container .user-container .user-comments span {
+        font-weight: 700;
+        color: #8c67ef; }
+    .users-container .user-container:hover {
+      background-color: rgba(0, 0, 0, 0.06) !important; }

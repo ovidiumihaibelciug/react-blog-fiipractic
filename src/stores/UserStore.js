@@ -1,12 +1,13 @@
 import { observable, action, decorate } from "mobx";
 
-import { GET_USER } from "../types";
+import { GET_USER, GET_USERS } from "../types";
 import { client } from "../apollo";
 
 export default class UserStore {
   loading = true;
   user = {};
   loggedUser = {};
+  users = {};
 
   handleLoading() {
     this.loading = !this.loading;
@@ -44,13 +45,24 @@ export default class UserStore {
            this.loggedUser = 0;
        }
     }
+
+    async getUsers() {
+        const { data } = await client.query({
+            query: GET_USERS,
+        });
+        console.log("DATA: ", data.users);
+        this.users = data.users;
+        this.loading = false;
+    }
 }
 
 decorate(UserStore, {
   loading: observable,
   user: observable,
+  users: observable,
   loggedUser: observable,
   handleLoading: action,
   getUserById: action,
-  getUSerByEmail: action
+  getUSerByEmail: action,
+  getUSers: action
 });

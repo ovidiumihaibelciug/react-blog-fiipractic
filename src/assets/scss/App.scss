@@ -53,3 +53,26 @@ body {
 }
 
 
+.users-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .user-container {
+        margin: 10px;
+        width: 30%;
+        .user-posts, .user-comments {
+            font-weight: 500;
+            span {
+                font-weight: 700;
+                color: $primary;
+            }
+        
+        }
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+    }
+}
+
